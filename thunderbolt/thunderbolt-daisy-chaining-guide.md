@@ -14,12 +14,12 @@ Daisy-chaining allows connecting multiple Thunderbolt devices in series through 
 - **Real-world**: Works well with 2-3 devices, tested configurations show stable operation
 
 ### Bandwidth Distribution (TB3)
-| Position | Available Bandwidth | Typical Use Case |
-|----------|-------------------|------------------|
-| Device 1 | ~22 Gbps | eGPU or high-speed storage |
-| Device 2 | ~18 Gbps | External SSD |
-| Device 3 | ~14 Gbps | Dock with peripherals |
-| Device 4+ | ~10 Gbps | Low-bandwidth devices |
+| Position | PCIe Available | Display Impact | Notes |
+|----------|----------------|----------------|-------|
+| Direct | 22 Gbps | None | Max PCIe bandwidth |
+| + 4K@60Hz | 22 Gbps | -14 Gbps total | 8 Gbps effective remaining |
+| + 5K@60Hz | 18 Gbps | -22 Gbps total | Near bandwidth limit |
+| Device 2+ | Shared | Cumulative | Performance degradation |
 
 ## Thunderbolt 4 Changes & Concerns
 

@@ -3,9 +3,10 @@
 ## Standards Comparison
 
 ### Thunderbolt 3
-- **Bandwidth**: 40 Gbps bidirectional (but PCIe limited to ~22 Gbps)
-- **PCIe**: PCIe 3.0 with ~22 Gbps cap for data (18 Gbps reserved for DisplayPort)
-- **DisplayPort**: DP 1.2 (mandatory) or DP 1.4 (optional)
+- **Bandwidth**: 40 Gbps total (32.4 Gbps theoretical PCIe, 22-24 Gbps practical)
+- **PCIe**: 4×PCIe 3.0 lanes, hardcoded 22 Gbps cap (18 Gbps DisplayPort reserved)
+- **Real-world**: 25.92 Gbps after 8b/10b encoding, ~22-24 Gbps measured
+- **DisplayPort**: DP 1.2/1.4, priority over PCIe, scales with resolution
 - **Power**: Up to 100W charging, 15W to devices
 - **Daisy-chain**: Up to 6 devices
 
@@ -38,10 +39,18 @@
 - **8K @ 60Hz**: 57.32 Gbps (requires DP 2.0)
 - **8K @ 60Hz 10-bit**: 71.65 Gbps (needs DP 2.0 UHBR 20)
 
-### Bandwidth Impact on PCIe (TB3/4)
-- 1× 4K@60Hz uses 17.28 Gbps → 22.72 Gbps PCIe available
-- 2× 4K@60Hz uses 34.56 Gbps → 5.44 Gbps PCIe available
-- 1× 5K@60Hz uses 25.92 Gbps → 14.08 Gbps PCIe available
+### Bandwidth Impact on PCIe
+
+**TB3 (22 Gbps PCIe cap)**:
+- No display: 22 Gbps PCIe available
+- 1× 4K@60Hz (14 Gbps): 8 Gbps PCIe remaining
+- 1× 5K@60Hz (22 Gbps): 0 Gbps PCIe remaining
+- 2× 4K@60Hz: Exceeds TB3 total bandwidth
+
+**TB4 (32 Gbps PCIe)**:
+- 1× 4K@60Hz: 18 Gbps PCIe available
+- 2× 4K@60Hz: Limited by 40 Gbps total
+- 1× 5K@60Hz: 10 Gbps PCIe available
 
 ## Linux Compatibility
 
