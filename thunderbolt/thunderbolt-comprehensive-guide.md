@@ -3,18 +3,18 @@
 ## Standards Comparison
 
 ### Thunderbolt 3
-- **Bandwidth**: 40 Gbps bidirectional (~22 Gbps effective after overhead)
-- **PCIe**: PCIe 3.0, configurable 2-4 lanes (16-32 Gbps)
+- **Bandwidth**: 40 Gbps bidirectional (but PCIe limited to ~22 Gbps)
+- **PCIe**: PCIe 3.0 with ~22 Gbps cap for data (18 Gbps reserved for DisplayPort)
 - **DisplayPort**: DP 1.2 (mandatory) or DP 1.4 (optional)
 - **Power**: Up to 100W charging, 15W to devices
 - **Daisy-chain**: Up to 6 devices
 
 ### Thunderbolt 4
 - **Bandwidth**: 40 Gbps bidirectional
-- **PCIe**: PCIe 3.0 with mandatory 32 Gbps minimum
+- **PCIe**: PCIe 3.0 with mandatory 32 Gbps (removed TB3's 22 Gbps cap)
 - **DisplayPort**: DP 1.4 with DP 2.0 support
 - **Power**: Up to 100W charging, 15W to devices
-- **Improvements**: VT-d DMA protection, 2m cables, wake from sleep
+- **Improvements**: VT-d DMA protection, 2m cables, wake from sleep, hub support
 
 ### Thunderbolt 5
 - **Bandwidth**: 80 Gbps bidirectional, 120 Gbps with Bandwidth Boost
