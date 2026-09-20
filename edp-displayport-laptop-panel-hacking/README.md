@@ -5,6 +5,40 @@ internal display path, and the FW13 vs FW16 eDP connector question.
 
 Research date: **2026-09-20**.
 
+
+## ⭐ The two-minute answer (added 2026-09-20 after adversarial review)
+
+**1. The laptop's eDP connector is irrelevant to this build.** eDP is a *source* output; Glider is a
+*sink*. FW13 and FW16 share the same mainboard-side I-PEX 20879-040E and their pinouts differ only in
+four pins FW16 adds (DDS SCL/SDA, PSR_EN#, OD_EN) — but that similarity buys nothing here, because
+neither can feed Glider. No off-the-shelf eDP-source → DP-Alt-Mode-source adapter exists.
+
+**2. ⚠ Do NOT assume USB-C DP Alt Mode is the only input.** An earlier version of this README led with
+the Alt-Mode chain (FUSB302B → CBTL02043A mux → PTN3460), which requires USB-PD negotiation. Glider
+*also* has a **DVI input over Mini-HDMI via an ADV7611** — a plain TMDS sink with **no PD, no CC
+lines, no Alt-Mode mux**. Modos's own USAGE.md says: *"If DVI via the Mini-HDMI connector is needed,
+use two cables: USB-C for power and USB, plus a Mini-HDMI video cable for video."* Max pixel rate over
+DVI is 165 MP/s — ample for 1600×1200. ⇒ **The HDMI path is the simpler one and is very likely what
+the working demo used.** Leading with Alt-Mode was a half-answer.
+
+**3. The two decisive mechanical numbers, both previously missing:**
+
+| | value | source |
+|---|---|---|
+| Glider mainboard | **90.00 × 80.00 mm**, 1.0044 mm PCB, 3× M2 holes | measured from `Edge.Cuts` in `pcb/mainboard/pcb.kicad_pcb` — Modos states it nowhere in prose |
+| ED133UT3 panel **outline** | **285.80 × 213.65 × 0.78 mm** (active 270.40 × 202.80, 4 mm bezel, 96 g) | panel drawing |
+
+⚠ **Use the panel OUTLINE, not its active area, for fit.** Comparing active-area-to-active-area
+flatters the result badly:
+
+* **Framework 13** lid opening ≈ 284.93 × 189.96 mm ⇒ the panel is **~23.7 mm too tall and ~0.9 mm
+  too wide**. ⛔ It does not go in a 13 lid, full stop.
+* **Framework 16** lid opening ≈ 344.6 × 215.4 mm ⇒ fits, but with only **~1.75 mm** of height
+  margin (and ~58.8 mm spare width). Not the ~12.7 mm an active-area comparison suggests.
+
+⇒ On the 16 it is *marginal but positive*, and the real question is the lid **cavity depth**, not the
+opening — the panel's folded source-driver COFs raise local thickness in a band along the tail edge.
+
 ## Contents
 
 * `framework-edp-fw13-vs-fw16-connector.md` — connector part numbers, both-side pinouts,
