@@ -18,8 +18,16 @@ the Alt-Mode chain (FUSB302B → CBTL02043A mux → PTN3460), which requires USB
 *also* has a **DVI input over Mini-HDMI via an ADV7611** — a plain TMDS sink with **no PD, no CC
 lines, no Alt-Mode mux**. Modos's own USAGE.md says: *"If DVI via the Mini-HDMI connector is needed,
 use two cables: USB-C for power and USB, plus a Mini-HDMI video cable for video."* Max pixel rate over
-DVI is 165 MP/s — ample for 1600×1200. ⇒ **The HDMI path is the simpler one and is very likely what
-the working demo used.** Leading with Alt-Mode was a half-answer.
+DVI is 165 MP/s — ample for 1600×1200. ⇒ **The HDMI path is the simpler one**, and leading with
+Alt-Mode alone was a half-answer.
+
+⚠ **But do not conclude the demo used DVI — it did not.** Corrected 2026-09-20 against the builder's
+own repository (`github.com/cittadhammo/omarchy-modos-eink`, MIT): *"USB-C DisplayPort Alt Mode
+remains the video path; the HID interface is a separate control path."* ⇒ The working Framework 13
+build runs **DP Alt Mode for video**, with **USB HID as a second, independent control channel** for
+refresh modes. A first-hand account from the person who built it beats our inference from a schematic.
+⇒ Practical consequence for an in-lid build: you need **USB data**, not just video and power, reaching
+the board — and non-root control needs a udev rule for the raw HID node (VID `0x1209`, PID `0xae86`).
 
 **3. The two decisive mechanical numbers, both previously missing:**
 
